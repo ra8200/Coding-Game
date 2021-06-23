@@ -2,17 +2,17 @@ var timeEl = document.getElementById("timer");
 var secondsLeft = 60;
 var timerInterval;
 
-var qTitle = document.getElementById("Question");
-var c1El = document.getElementById("btnA1");
-var c2El = document.getElementById("btnA2");
-var c3El = document.getElementById("btnA3");
-var c4El = document.getElementById("btnA4");
+var questName = document.getElementById("Question");
+var firstChoiceEl = document.getElementById("answerButton1");
+var secondChoiceEl = document.getElementById("answerButton2");
+var thirdChoiceEl = document.getElementById("answerButton3");
+var forthChoiceEl = document.getElementById("answerButton4");
 var sTakeQ = document.getElementById("takeQuiz");
 var sScore = document.getElementById("finalScore");
 var sMain = document.getElementById("startQuiz");
-var msgEl = document.getElementById("result");
-var msgDone = document.getElementById("msgQuizDone");
-var msgScoreEl = document.getElementById("msgScore");
+var resultsEl = document.getElementById("result");
+var messageDone = document.getElementById("msgQuizDone");
+var scoreMessageEl = document.getElementById("msgScore");
 
 var numCorrectAnswers = 0;
 var numTotalQuestions = 0;
@@ -24,17 +24,19 @@ var blnFinalQuestion = false;
 sTakeQ.addEventListener("click", function (event) {
   var element = event.target;
   if (element.matches("button")) {
-    msgEl.textContent = element.getAttribute("data-answered");
-    msgEl.style.color = "red";
+    resultsEl.textContent = element.getAttribute("data-answered");
+    resultsEl.style.color = "red";
     if (element.getAttribute("data-answered") === "Correct") {
       blnCorrect = true;
-      msgEl.style.color = "yellowgreen";
+      resultsEl.style.color = "yellowgreen";
       numCorrectAnswers++;
     } else {
+
       timeLeft -= 10;
       checkTimeRemaining();
 
     }
+
     idxQuestion++;
     loadQuestion();
   }
@@ -51,7 +53,7 @@ function loadQuestion() {
   var correctAnswer = questions[idxQuestion].answer;
   numTotalQuestions++;
 
-  qTitle.textContent = questions[idxQuestion].title;
+  questName.textContent = questions[idxQuestion].title;
   
   questions[idxQuestion].choices.sort(function() {
           return 0.5 - Math.random();
@@ -63,28 +65,28 @@ function loadQuestion() {
     }
   }
 
-  c1El.textContent = questions[idxQuestion].choices[0];
-  c2El.textContent = questions[idxQuestion].choices[1];
-  c3El.textContent = questions[idxQuestion].choices[2];
-  c4El.textContent = questions[idxQuestion].choices[3];
+  firstChoiceEl.textContent = questions[idxQuestion].choices[0];
+  secondChoiceEl.textContent = questions[idxQuestion].choices[1];
+  thirdChoiceEl.textContent = questions[idxQuestion].choices[2];
+  forthChoiceEl.textContent = questions[idxQuestion].choices[3];
 
-  c1El.setAttribute("data-answered", "Incorrect");
-  c2El.setAttribute("data-answered", "Incorrect");
-  c3El.setAttribute("data-answered", "Incorrect");
-  c4El.setAttribute("data-answered", "Incorrect");
+  firstChoiceEl.setAttribute("data-answered", "Incorrect");
+  secondChoiceEl.setAttribute("data-answered", "Incorrect");
+  thirdChoiceEl.setAttribute("data-answered", "Incorrect");
+  forthChoiceEl.setAttribute("data-answered", "Incorrect");
 
   switch (idxCorrect) {
     case 0:
-      c1El.setAttribute("data-answered", "Correct");
+        firstChoiceEl.setAttribute("data-answered", "Correct");
       break;
     case 1:
-      c2El.setAttribute("data-answered", "Correct");
+        secondChoiceEl.setAttribute("data-answered", "Correct");
       break;
     case 2:
-      c3El.setAttribute("data-answered", "Correct");
+        thirdChoiceEl.setAttribute("data-answered", "Correct");
       break;
     case 3:
-      c4El.setAttribute("data-answered", "Correct");
+        forthChoiceEl.setAttribute("data-answered", "Correct");
       break;
   }
 }
@@ -144,18 +146,18 @@ function takeQuiz() {
 }
 
 function disableQuiz() {
-  c1El.disabled = true;
-  c1El.classList.remove("btn-primary");
-  c1El.classList.add("btn-secondary");
-  c2El.disabled = true;
-  c2El.classList.remove("btn-primary");
-  c2El.classList.add("btn-secondary");
-  c3El.disabled = true;
-  c3El.classList.remove("btn-primary");
-  c3El.classList.add("btn-secondary");
-  c4El.disabled = true;
-  c4El.classList.remove("btn-primary");
-  c4El.classList.add("btn-secondary");
+  firstChoiceEl.disabled = true;
+  firstChoiceEl.classList.remove("btn-primary");
+  firstChoiceEl.classList.add("btn-secondary");
+  secondChoiceEl.disabled = true;
+  secondChoiceEl.classList.remove("btn-primary");
+  secondChoiceEl.classList.add("btn-secondary");
+  thirdChoiceEl.disabled = true;
+  thirdChoiceEl.classList.remove("btn-primary");
+  thirdChoiceEl.classList.add("btn-secondary");
+  forthChoiceEl.disabled = true;
+  forthChoiceEl.classList.remove("btn-primary");
+  forthChoiceEl.classList.add("btn-secondary");
 }
 
 document.querySelector("#startBtn").onclick = function (event) {
