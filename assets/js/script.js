@@ -9,7 +9,7 @@ var thirdChoiceEl = document.getElementById("answerButton3");
 var forthChoiceEl = document.getElementById("answerButton4");
 var sTakeQ = document.getElementById("takeQuiz");
 var sScore = document.getElementById("finalScore");
-var sMain = document.getElementById("startQuiz");
+var startGame = document.getElementById("startQuiz");
 var resultsEl = document.getElementById("result");
 var messageDone = document.getElementById("msgQuizDone");
 var scoreMessageEl = document.getElementById("msgScore");
@@ -139,7 +139,7 @@ function takeQuiz() {
 
   idxQuestion = 0;
   loadQuestion();
-  sMain.classList.add("d-none");
+  startGame.classList.add("d-none");
   sTakeQ.classList.remove("d-none");
 
   setTime();
